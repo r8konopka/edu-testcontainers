@@ -1,0 +1,4 @@
+redis:
+  image: redis:3.0.2
+postgres:
+  image: postgres

@@ -1,0 +1,38 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id "io.freefair.lombok" version "5.0.0" //lombok annotation processing
+	id 'java'
+}
+
+def junitJupiterVersion = '5.4.2'
+
+group = 'com.softwarehut.edu'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	annotationProcessor platform("org.projectlombok:lombok:$lombokVersion")
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.2.6.RELEASE'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'io.projectreactor:reactor-test'
+
+	testCompile "org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion"
+	testCompile "org.junit.jupiter:junit-jupiter-params:$junitJupiterVersion"
+	testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion"
+	testCompile "org.testcontainers:testcontainers:1.14.1"
+	testCompile "org.testcontainers:junit-jupiter:1.14.1"
+
+	compileOnly platform("org.projectlombok:lombok:$lombokVersion")
+}
+
+test {
+	useJUnitPlatform()
+}
